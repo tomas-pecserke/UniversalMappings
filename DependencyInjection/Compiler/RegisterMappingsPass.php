@@ -11,24 +11,23 @@
 
 namespace Pecserke\Component\UniversalMappings\DependencyInjection\Compiler;
 
+use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
  * Forward compatibility class in case the bundle is used with older
  * versions of Symfony2 or the doctrine bundles that do not provide the
  * register mappings compiler pass yet.
  *
+ * It's basically a copy of Symfony\Bridge\Doctrine\DependencyInjection\CompilerPass\RegisterMappingsPass.
+ *
  * The compiler pass is meant to register the mappings with the metadata
  * chain driver corresponding to one of the object managers.
  *
- * @deprecated Compatibility class to make the bundle work with Symfony < 2.3.
- *
  * @author David Buchmann <david@liip.ch>
- * @author Tomas Pecserke <tomas@pecserke.ch>
  */
 class RegisterMappingsPass implements CompilerPassInterface
 {
@@ -161,197 +160,5 @@ class RegisterMappingsPass implements CompilerPassInterface
     protected function enabled(ContainerBuilder $container)
     {
         return !$this->enabledParameter || $container->hasParameter($this->enabledParameter);
-    }
-
-    /**
-     * @param array $mappings
-     * @param string[] $managerParameters
-     * @param string|bool $enabledParameter
-     * @param string $extension
-     * @param string $driverClass
-     * @param string $driverPattern
-     * @return RegisterMappingsPass
-     */
-    protected static function createMappingDriver(array $mappings, array $managerParameters, $enabledParameter, $extension, $driverClass, $driverPattern)
-    {
-        $arguments = array($mappings, $extension);
-        $locator = new Definition('Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator', $arguments);
-        $driver = new Definition($driverClass, array($locator));
-
-        return new RegisterMappingsPass(
-            $driver,
-            $mappings,
-            $managerParameters,
-            $driverPattern,
-            $enabledParameter
-        );
-    }
-
-    /**
-     * @param array $mappings
-     * @param string[] $managerParameters
-     * @param string|bool $enabledParameter
-     * @param string $extension
-     * @param string $driverClass
-     * @return RegisterMappingsPass
-     */
-    protected static function createOrmMappingDriver(array $mappings, array $managerParameters, $enabledParameter, $extension, $driverClass)
-    {
-        $managerParameters[] = 'doctrine.default_entity_manager';
-
-        return static::createMappingDriver(
-            $mappings,
-            $managerParameters,
-            $enabledParameter,
-            '.orm.' . $extension,
-            $driverClass,
-            'doctrine.orm.%s_metadata_driver'
-        );
-    }
-
-    /**
-     * @param array $mappings
-     * @param string[] $managerParameters
-     * @param string|bool $enabledParameter
-     * @param string $extension
-     * @param string $driverClass
-     * @return RegisterMappingsPass
-     */
-    protected static function createMongoDBMappingDriver(array $mappings, array $managerParameters, $enabledParameter, $extension, $driverClass)
-    {
-        $managerParameters[] = 'doctrine_mongodb.odm.default_document_manager';
-
-        return static::createMappingDriver(
-            $mappings,
-            $managerParameters,
-            $enabledParameter,
-            '.mongodb.' . $extension,
-            $driverClass,
-            'doctrine_mongodb.odm.%s_metadata_driver'
-        );
-    }
-
-    /**
-     * @param array $mappings
-     * @param string[] $managerParameters
-     * @param string|bool $enabledParameter
-     * @param string $extension
-     * @param string $driverClass
-     * @return RegisterMappingsPass
-     */
-    protected static function createCouchDBMappingDriver(array $mappings, array $managerParameters, $enabledParameter, $extension, $driverClass)
-    {
-        $managerParameters[] = 'doctrine_couchdb.default_document_manager';
-
-        return static::createMappingDriver(
-            $mappings,
-            $managerParameters,
-            $enabledParameter,
-            '.couchdb.' . $extension,
-            $driverClass,
-            'doctrine_couchdb.odm.%s_metadata_driver'
-        );
-    }
-
-    /**
-     * @param array $mappings
-     * @param string[] $managerParameters
-     * @param string|bool $enabledParameter
-     * @return RegisterMappingsPass
-     */
-    public static function createOrmXmlMappingDriver(array $mappings, array $managerParameters, $enabledParameter = false)
-    {
-        return static::createOrmMappingDriver(
-            $mappings,
-            $managerParameters,
-            $enabledParameter,
-            'xml',
-            'Doctrine\ORM\Mapping\Driver\XmlDriver'
-        );
-    }
-
-    /**
-     * @param array $mappings
-     * @param string[] $managerParameters
-     * @param string|bool $enabledParameter
-     * @return RegisterMappingsPass
-     */
-    public static function createOrmYamlMappingDriver(array $mappings, array $managerParameters, $enabledParameter = false)
-    {
-        return static::createOrmMappingDriver(
-            $mappings,
-            $managerParameters,
-            $enabledParameter,
-            'yml',
-            'Doctrine\ORM\Mapping\Driver\YamlDriver'
-        );
-    }
-
-    /**
-     * @param array $mappings
-     * @param string[] $managerParameters
-     * @param string|bool $enabledParameter
-     * @return RegisterMappingsPass
-     */
-    public static function createMongoDBXmlMappingDriver(array $mappings, array $managerParameters, $enabledParameter = false)
-    {
-        return static::createMongoDBMappingDriver(
-            $mappings,
-            $managerParameters,
-            $enabledParameter,
-            'xml',
-            'Doctrine\ODM\MongoDB\Mapping\Driver\XmlDriver'
-        );
-    }
-
-    /**
-     * @param array $mappings
-     * @param string[] $managerParameters
-     * @param string|bool $enabledParameter
-     * @return RegisterMappingsPass
-     */
-    public static function createMongoDBYamlMappingDriver(array $mappings, array $managerParameters, $enabledParameter = false)
-    {
-        return static::createMongoDBMappingDriver(
-            $mappings,
-            $managerParameters,
-            $enabledParameter,
-            'yml',
-            'Doctrine\ODM\MongoDB\Mapping\Driver\YamlDriver'
-        );
-    }
-
-    /**
-     * @param array $mappings
-     * @param string[] $managerParameters
-     * @param string|bool $enabledParameter
-     * @return RegisterMappingsPass
-     */
-    public static function createCouchDBXmlMappingDriver(array $mappings, array $managerParameters, $enabledParameter = false)
-    {
-        return static::createCouchDBMappingDriver(
-            $mappings,
-            $managerParameters,
-            $enabledParameter,
-            'xml',
-            'Doctrine\ODM\CouchDB\Mapping\Driver\XmlDriver'
-        );
-    }
-
-    /**
-     * @param array $mappings
-     * @param string[] $managerParameters
-     * @param string|bool $enabledParameter
-     * @return RegisterMappingsPass
-     */
-    public static function createCouchDBYamlMappingDriver(array $mappings, array $managerParameters, $enabledParameter = false)
-    {
-        return static::createCouchDBMappingDriver(
-            $mappings,
-            $managerParameters,
-            $enabledParameter,
-            'yml',
-            'Doctrine\ODM\CouchDB\Mapping\Driver\YamlDriver'
-        );
     }
 }

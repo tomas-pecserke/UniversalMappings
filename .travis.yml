@@ -1,0 +1,20 @@
+language: php
+
+php:
+    - 5.3.3
+    - 5.3
+    - 5.4
+    - 5.5
+
+env:
+    - DOCTRINE_BRIDGE_VERSION=2.0
+    - DOCTRINE_BRIDGE_VERSION=2.1
+    - DOCTRINE_BRIDGE_VERSION=2.2
+
+before_script:
+    - curl -s http://getcomposer.org/installer | php
+    - php composer.phar require symfony/doctrine-bridge:${DOCTRINE_BRIDGE_VERSION} --prefer-source
+
+notifications:
+    email:
+        - tomas@pecserke.eu
