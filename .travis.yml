@@ -15,7 +15,8 @@ env:
 
 before_script:
     - curl -s http://getcomposer.org/installer | php
-    - php composer.phar require symfony/doctrine-bridge:${DOCTRINE_BRIDGE_VERSION} --prefer-source
+    - if [ $(php -v | grep '5.3.3' -c) -ne 0 ]; then export PREFER="--prefer-source"; else PREFER="--prefer-dist"; fi
+    - php composer.phar require symfony/doctrine-bridge:${DOCTRINE_BRIDGE_VERSION} ${PREFER}
 
 notifications:
     email:
