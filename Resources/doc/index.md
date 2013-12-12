@@ -26,7 +26,8 @@ Composer will install the component into your project's `vendor/pecserke` direct
 
 ## Using universal mappings
 
-Create a Symfony2 bundle and extend class `Pecserke\Component\UniversalMappings\UniversalMappingsBundle`
+Create a Symfony2 bundle and extend class
+`Pecserke\Component\UniversalMappings\HttpKernel\Bundle\UniversalMappingsBundle`
 with your Bundle class:
 
 
@@ -37,7 +38,7 @@ Enable the bundle in the kernel:
 <?php
 namespace Acme\Bundle\DemoBundle;
 
-use Pecserke\Component\UniversalMappings\UniversalMappingsBundle;
+use Pecserke\Component\UniversalMappings\HttpKernel\Bundle\UniversalMappingsBundle;
 
 class AcmeDemoBundle extends UniversalMappingsBundle
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Pecserke\Component\UniversalMappings;
+namespace Pecserke\Component\UniversalMappings\HttpKernel\Bundle;
 
 use Doctrine\Bundle\CouchDBBundle\DependencyInjection\Compiler\DoctrineCouchDBMappingsPass;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
