@@ -84,7 +84,7 @@ class UniversalMappingsBundleTest extends \PHPUnit_Framework_TestCase
     public function testBuildOrm()
     {
         $this->bundle->build($this->container);
-        $this->container->setParameter('test.backend_type_orm', true);
+        $this->container->setParameter('test.backend.orm', true);
         $this->container->compile();
 
         $calls = $this->container->getDefinition('doctrine.orm.default_metadata_driver')->getMethodCalls();
@@ -112,7 +112,7 @@ class UniversalMappingsBundleTest extends \PHPUnit_Framework_TestCase
     public function testBuildMongoDB()
     {
         $this->bundle->build($this->container);
-        $this->container->setParameter('test.backend_type_mongodb', true);
+        $this->container->setParameter('test.backend.mongodb', true);
         $this->container->compile();
 
         $calls = $this->container->getDefinition('doctrine_mongodb.odm.default_metadata_driver')->getMethodCalls();
@@ -140,7 +140,7 @@ class UniversalMappingsBundleTest extends \PHPUnit_Framework_TestCase
     public function testBuildCouchDB()
     {
         $this->bundle->build($this->container);
-        $this->container->setParameter('test.backend_type_couchdb', true);
+        $this->container->setParameter('test.backend.couchdb', true);
         $this->container->compile();
 
         $calls = $this->container->getDefinition('doctrine_couchdb.odm.default_metadata_driver')->getMethodCalls();
