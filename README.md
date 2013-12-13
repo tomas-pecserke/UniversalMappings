@@ -3,8 +3,11 @@ PecserkeUniversalMappings
 
 [![Build Status](https://travis-ci.org/tomas-pecserke/UniversalMappings.png?branch=master)](https://travis-ci.org/tomas-pecserke/UniversalMappings)
 
-This bundle for Symfony 2 allows you to write your [Doctrine2](http://www.doctrine-project.org/)
-model classes once for multiple mappings (ORM, MongoDB, CouchDB).
+This [Symfony 2](http://symfony.com/) component allows you to write your [Doctrine2](http://www.doctrine-project.org/)
+model classes once for multiple mappings
+([ORM](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/),
+[MongoDB](http://docs.doctrine-project.org/projects/doctrine-mongodb-odm/en/latest/),
+[CouchDB](http://doctrine-orm.readthedocs.org/projects/doctrine-couchdb/en/latest/index.html)).
 Let the bundle user decide, which mapping to use without additional effort.
 
 Installation
