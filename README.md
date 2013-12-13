@@ -8,7 +8,7 @@ model classes once for multiple mappings
 ([ORM](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/),
 [MongoDB](http://docs.doctrine-project.org/projects/doctrine-mongodb-odm/en/latest/),
 [CouchDB](http://doctrine-orm.readthedocs.org/projects/doctrine-couchdb/en/latest/index.html)).
-Let the bundle user decide, which mapping to use without additional effort.
+Let your bundle's users decide, which mapping they will use without additional effort.
 
 Installation
 ------------
