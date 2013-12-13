@@ -1,7 +1,7 @@
 PecserkeUniversalMappings
 =========================
 
-[![Build Status](https://travis-ci.org/tomas-pecserke/UniversalMappings.png?branch=master)](https://travis-ci.org/tomas-pecserke/UniversalMappings)
+[![Build Status](https://travis-ci.org/tomas-pecserke/UniversalMappings.png?branch=1.0)](https://travis-ci.org/tomas-pecserke/UniversalMappings)
 
 This [Symfony 2](http://symfony.com/) component allows you to write your [Doctrine2](http://www.doctrine-project.org/)
 model classes once for multiple mappings
