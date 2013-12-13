@@ -16,7 +16,7 @@
     },
     "target-dir": "Pecserke/Component/UniversalMapping",
     "require": {
-        "symfony/doctrine-bridge": "~2.0",
+        "symfony/doctrine-bridge": ">=2.0,<2.3",
         "symfony/dependency-injection": "~2.0",
         "symfony/http-kernel": "~2.0",
         "symfony/config": "~2.0"
