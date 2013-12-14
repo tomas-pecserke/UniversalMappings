@@ -1,5 +1,5 @@
 {
-    "name": "pecserke/universal-mapping",
+    "name": "pecserke/universal-mappings",
     "type": "symfony-bundle",
     "description": "Symfony2 Twig DoctrineLoader Bundle",
     "keywords": [ "Doctrine", "Mapping", "Symfony2" ],
