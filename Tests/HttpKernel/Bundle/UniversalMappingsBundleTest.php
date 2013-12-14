@@ -9,6 +9,7 @@
 
 namespace Pecserke\Component\UniversalMappings\Tests\HttpKernel\Bundle;
 
+use Pecserke\Component\UniversalMappings\HttpKernel\Bundle\UniversalMappingsBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -25,7 +26,7 @@ class UniversalMappingsBundleTest extends \PHPUnit_Framework_TestCase
     private $namespace = 'Test\Namespace';
 
     /**
-     * @var UniversalMappingsBundleTest
+     * @var UniversalMappingsBundle
      */
     private $bundle;
 

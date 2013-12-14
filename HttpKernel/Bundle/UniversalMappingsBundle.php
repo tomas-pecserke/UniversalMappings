@@ -70,6 +70,6 @@ abstract class UniversalMappingsBundle extends Bundle
             return $extension->getAlias();
         }
 
-        return ContainerBuilder::underscore(substr($this->getName(), 0, -6)); // "Bundle" is 6 chars long
+        return ContainerBuilder::underscore(substr($this->getName(), 0, -6)); // remove "Bundle" from end
     }
 }
