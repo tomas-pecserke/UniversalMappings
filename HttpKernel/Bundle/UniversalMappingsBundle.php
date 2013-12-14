@@ -70,6 +70,14 @@ abstract class UniversalMappingsBundle extends Bundle
     /**
      * @return string
      */
+    protected function getBasename()
+    {
+        return preg_replace('/Bundle$/', '', $this->getName());
+    }
+
+    /**
+     * @return string
+     */
     protected function getAlias()
     {
         $extension = $this->getContainerExtension();
@@ -78,6 +86,6 @@ abstract class UniversalMappingsBundle extends Bundle
             return $extension->getAlias();
         }
 
-        return ContainerBuilder::underscore(substr($this->getName(), 0, -6)); // remove "Bundle" from end
+        return ContainerBuilder::underscore($this->getBasename());
     }
 }
