@@ -1,4 +1,12 @@
 <?php
+
+/*
+ * (c) Tomas Pecserke <tomas@pecserke.eu>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Pecserke\Component\UniversalMappings\HttpKernel\Bundle;
 
 use Doctrine\Bundle\CouchDBBundle\DependencyInjection\Compiler\DoctrineCouchDBMappingsPass;
