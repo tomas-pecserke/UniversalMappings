@@ -4,7 +4,7 @@
     "description": "Symfony2 Twig DoctrineLoader Bundle",
     "keywords": [ "Doctrine", "Mapping", "Symfony2" ],
     "license": "MIT",
-    "homepage": "https://github.com/tomas-pecserke/UniversalMapping",
+    "homepage": "https://github.com/tomas-pecserke/UniversalMappings",
     "authors": [
         {
             "name": "Tomas Pecserke",
