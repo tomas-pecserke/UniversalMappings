@@ -178,6 +178,10 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('orm') // use ORM by default
                     ->info('chooses doctrine backend for model')
                 ->end()
+                ->scalarNode('manager_name')
+                    ->defaultValue('default')
+                    ->cannotBeEmpty()
+                ->end()
             ->end()
         ;
 
@@ -203,6 +207,7 @@ class AcmeDemoExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter(sprintf('%s.backend.%s', $this->getAlias(), $config['backend']), true);
+        $container->setParameter(sprintf('%s.model_manager_name', $this->getAlias()), $config['manager_name']);
     }
 }
 ```
@@ -215,3 +220,7 @@ If no configuration is provided, the default value will be used (in this case `o
 acme_demo:
     backend: mongodb
 ```
+
+## Advanced use of universal mappings
+
+- [Manual mapping passes registration](manual_mapping_passes_registration.md)
