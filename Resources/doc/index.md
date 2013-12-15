@@ -121,6 +121,7 @@ Acme\Bundle\DemoBundle\Model\Product:
 ``` yaml
 # src/Acme/Bundle/DemoBundle/Resources/config/doctrine/model/Product.mongodb.yml
 Acme\Bundle\DemoBundle\Model\Product:
+    type: document
     fields:
         id:
             id:  true
