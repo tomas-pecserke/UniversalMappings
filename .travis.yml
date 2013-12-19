@@ -10,8 +10,6 @@ env:
     - DOCTRINE_BRIDGE_VERSION=2.0.*
     - DOCTRINE_BRIDGE_VERSION=2.1
     - DOCTRINE_BRIDGE_VERSION=2.2
-    - DOCTRINE_BRIDGE_VERSION=2.3
-    - DOCTRINE_BRIDGE_VERSION=2.4
 
 before_script:
     - curl -s http://getcomposer.org/installer | php
