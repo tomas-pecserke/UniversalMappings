@@ -12,6 +12,7 @@ namespace Pecserke\Component\UniversalMappings\HttpKernel\Bundle;
 use Doctrine\Bundle\CouchDBBundle\DependencyInjection\Compiler\DoctrineCouchDBMappingsPass;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Doctrine\Bundle\MongoDBBundle\DependencyInjection\Compiler\DoctrineMongoDBMappingsPass;
+use Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass;
 use Pecserke\Component\UniversalMappings\DependencyInjection\Compiler\RegisterMappingsPassFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -64,6 +65,15 @@ abstract class UniversalMappingsBundle extends Bundle
         } else {
             $container->addCompilerPass(RegisterMappingsPassFactory::createCouchDBXmlMappingDriver($mappings, $managerParameters, $enabledParameter));
             $container->addCompilerPass(RegisterMappingsPassFactory::createCouchDBYamlMappingDriver($mappings, $managerParameters, $enabledParameter));
+        }
+
+        $enabledParameter = sprintf('%s.backend.phpcr', $alias);
+        if ($symfonyVersion && class_exists('Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass')) {
+            $container->addCompilerPass(DoctrinePhpcrMappingsPass::createXmlMappingDriver($mappings, $managerParameters, $enabledParameter));
+            $container->addCompilerPass(DoctrinePhpcrMappingsPass::createYamlMappingDriver($mappings, $managerParameters, $enabledParameter));
+        } else {
+            $container->addCompilerPass(RegisterMappingsPassFactory::createPhpcrXmlMappingDriver($mappings, $managerParameters, $enabledParameter));
+            $container->addCompilerPass(RegisterMappingsPassFactory::createPhpcrYamlMappingDriver($mappings, $managerParameters, $enabledParameter));
         }
     }
 
