@@ -110,10 +110,8 @@ Acme\Bundle\DemoBundle\Model\Product:
     fields:
         name:
             type: string
-            length: 100
         price:
             type: decimal
-            scale: 2
         description:
             type: text
 ```
@@ -135,6 +133,17 @@ Acme\Bundle\DemoBundle\Model\Product:
 
 ``` yaml
 # src/Acme/Bundle/DemoBundle/Resources/config/doctrine/model/Product.couchdb.yml
+Acme\Bundle\DemoBundle\Model\Product:
+    type: document
+    id: id
+    fields:
+        name: string
+        price: double
+        description: string
+```
+
+``` yaml
+# src/Acme/Bundle/DemoBundle/Resources/config/doctrine/model/Product.phpcr.yml
 Acme\Bundle\DemoBundle\Model\Product:
     type: document
     id:
