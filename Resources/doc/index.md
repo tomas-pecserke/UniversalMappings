@@ -184,7 +184,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->enumNode('backend')
-                    ->values(array('orm', 'mongodb', 'couchdb'))
+                    ->values(array('orm', 'mongodb', 'couchdb', 'phpcr'))
                     ->defaultValue('orm') // use ORM by default
                     ->info('chooses doctrine backend for model')
                 ->end()
