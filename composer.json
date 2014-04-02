@@ -12,9 +12,8 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Pecserke\\Component\\UniversalMapping": "" }
+        "psr-4": { "Pecserke\\Component\\UniversalMappings": "" }
     },
-    "target-dir": "Pecserke/Component/UniversalMapping",
     "require": {
         "symfony/doctrine-bridge": ">=2.0,<2.3",
         "symfony/dependency-injection": "~2.0",
