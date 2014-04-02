@@ -12,7 +12,7 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Pecserke\\Component\\UniversalMappings": "" }
+        "psr-4": { "Pecserke\\Component\\UniversalMappings\\": "" }
     },
     "require": {
         "symfony/doctrine-bridge": ">=2.0,<2.3",
