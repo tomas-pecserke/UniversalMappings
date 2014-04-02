@@ -35,7 +35,7 @@ abstract class UniversalMappingsBundle extends Bundle
         $symfonyVersion = class_exists('Symfony\Bridge\Doctrine\DependencyInjection\CompilerPass\RegisterMappingsPass');
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => $this->getNamespace() . '\Model',
+            realpath($this->getPath() . '/Resources/config/doctrine/model') => $this->getNamespace() . '\Model',
         );
         $alias = $this->getAlias();
         $managerParameters = array(sprintf('%s.model_manager_name', $alias));
