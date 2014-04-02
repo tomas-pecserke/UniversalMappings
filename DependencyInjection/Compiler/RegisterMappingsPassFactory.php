@@ -112,6 +112,28 @@ class RegisterMappingsPassFactory
      * @param array $mappings
      * @param string[] $managerParameters
      * @param string|bool $enabledParameter
+     * @param string $extension
+     * @param string $driverClass
+     * @return RegisterMappingsPass
+     */
+    protected static function createPhpcrMappingDriver(array $mappings, array $managerParameters, $enabledParameter, $extension, $driverClass)
+    {
+        $managerParameters[] = 'doctrine_phpcr.odm.default_document_manager';
+
+        return static::createMappingDriver(
+            $mappings,
+            $managerParameters,
+            $enabledParameter,
+            '.phpcr.' . $extension,
+            $driverClass,
+            'doctrine_phpcr.odm.%s_metadata_driver'
+        );
+    }
+
+    /**
+     * @param array $mappings
+     * @param string[] $managerParameters
+     * @param string|bool $enabledParameter
      * @return RegisterMappingsPass
      */
     public static function createOrmXmlMappingDriver(array $mappings, array $managerParameters, $enabledParameter = false)
@@ -207,6 +229,40 @@ class RegisterMappingsPassFactory
             $enabledParameter,
             'yml',
             'Doctrine\ODM\CouchDB\Mapping\Driver\YamlDriver'
+        );
+    }
+
+    /**
+     * @param array $mappings
+     * @param string[] $managerParameters
+     * @param string|bool $enabledParameter
+     * @return RegisterMappingsPass
+     */
+    public static function createPhpcrXmlMappingDriver(array $mappings, array $managerParameters, $enabledParameter = false)
+    {
+        return static::createPhpcrMappingDriver(
+            $mappings,
+            $managerParameters,
+            $enabledParameter,
+            'xml',
+            'Doctrine\ODM\PHPCR\Mapping\Driver\XmlDriver'
+        );
+    }
+
+    /**
+     * @param array $mappings
+     * @param string[] $managerParameters
+     * @param string|bool $enabledParameter
+     * @return RegisterMappingsPass
+     */
+    public static function createPhpcrYamlMappingDriver(array $mappings, array $managerParameters, $enabledParameter = false)
+    {
+        return static::createPhpcrMappingDriver(
+            $mappings,
+            $managerParameters,
+            $enabledParameter,
+            'yml',
+            'Doctrine\ODM\PHPCR\Mapping\Driver\YamlDriver'
         );
     }
 }
