@@ -110,10 +110,8 @@ Acme\Bundle\DemoBundle\Model\Product:
     fields:
         name:
             type: string
-            length: 100
         price:
             type: decimal
-            scale: 2
         description:
             type: text
 ```
@@ -121,6 +119,7 @@ Acme\Bundle\DemoBundle\Model\Product:
 ``` yaml
 # src/Acme/Bundle/DemoBundle/Resources/config/doctrine/model/Product.mongodb.yml
 Acme\Bundle\DemoBundle\Model\Product:
+    type: document
     fields:
         id:
             id:  true
@@ -134,6 +133,17 @@ Acme\Bundle\DemoBundle\Model\Product:
 
 ``` yaml
 # src/Acme/Bundle/DemoBundle/Resources/config/doctrine/model/Product.couchdb.yml
+Acme\Bundle\DemoBundle\Model\Product:
+    type: document
+    id: id
+    fields:
+        name: string
+        price: double
+        description: string
+```
+
+``` yaml
+# src/Acme/Bundle/DemoBundle/Resources/config/doctrine/model/Product.phpcr.yml
 Acme\Bundle\DemoBundle\Model\Product:
     type: document
     id:
@@ -174,7 +184,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->enumNode('backend')
-                    ->values(array('orm', 'mongodb', 'couchdb'))
+                    ->values(array('orm', 'mongodb', 'couchdb', 'phpcr'))
                     ->defaultValue('orm') // use ORM by default
                     ->info('chooses doctrine backend for model')
                 ->end()

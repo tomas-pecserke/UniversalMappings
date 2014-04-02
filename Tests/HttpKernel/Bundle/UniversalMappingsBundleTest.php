@@ -80,6 +80,10 @@ class UniversalMappingsBundleTest extends \PHPUnit_Framework_TestCase
         $this->container->setParameter('doctrine_couchdb.default_document_manager', 'default');
         $this->couchdbChainDriverDefinition = new Definition($chainDriverClass);
         $this->container->setDefinition('doctrine_couchdb.odm.default_metadata_driver', $this->couchdbChainDriverDefinition);
+
+        $this->container->setParameter('doctrine_phpcr.odm.default_document_manager', 'default');
+        $this->couchdbChainDriverDefinition = new Definition($chainDriverClass);
+        $this->container->setDefinition('doctrine_phpcr.odm.default_metadata_driver', $this->couchdbChainDriverDefinition);
     }
 
     public function testBuildOrm()
@@ -165,5 +169,32 @@ class UniversalMappingsBundleTest extends \PHPUnit_Framework_TestCase
             'Doctrine\ODM\CouchDB\Mapping\Driver\YamlDriver'
         ));
     }
+
+    public function testBuildPhpcr()
+    {
+        $this->bundle->build($this->container);
+        $this->container->setParameter('test.backend.phpcr', true);
+        $this->container->compile();
+
+        $calls = $this->container->getDefinition('doctrine_phpcr.odm.default_metadata_driver')->getMethodCalls();
+
+        $definitions = array();
+        foreach ($calls as $call) {
+            $this->assertEquals('addDriver', $call[0]);
+            $this->assertEquals($this->namespace . '\Model', $call[1][1]);
+            $definitions[] = $call[1][0];
+        }
+
+        $classes = array_map(
+            function(Definition $definition) {
+                return $definition->getClass();
+            },
+            $definitions
+        );
+
+        $this->assertEquals($classes, array(
+            'Doctrine\ODM\PHPCR\Mapping\Driver\XmlDriver',
+            'Doctrine\ODM\PHPCR\Mapping\Driver\YamlDriver'
+        ));
+    }
 }
- 
