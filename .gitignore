@@ -2,8 +2,3 @@ composer.lock
 phpunit.xml
 catalog.xml
 vendor/*
-
-.buildpath
-.project
-.settings
-.idea
