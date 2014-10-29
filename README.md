@@ -4,6 +4,7 @@ PecserkeUniversalMappings
 [![Build Status](https://travis-ci.org/tomas-pecserke/UniversalMappings.png?branch=master)](https://travis-ci.org/tomas-pecserke/UniversalMappings)
 [![Latest Stable Version](https://poser.pugx.org/pecserke/universal-mappings/v/stable.png)](https://packagist.org/packages/pecserke/universal-mappings)
 [![Latest Unstable Version](https://poser.pugx.org/pecserke/universal-mappings/v/unstable.png)](https://packagist.org/packages/pecserke/universal-mappings)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/5722bfed-59e5-4dd0-b9a3-041900d64b82/mini.png)](https://insight.sensiolabs.com/projects/5722bfed-59e5-4dd0-b9a3-041900d64b82)
 
 This component allows  you to write your [Doctrine2](http://www.doctrine-project.org/)
 model classes once, and define only mapping information for each backend
